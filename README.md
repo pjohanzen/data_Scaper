@@ -1,7 +1,7 @@
-#Data Scraper
+Got it 👍 — here’s your updated **README.md** with the note about this being **v0** and still having minor bugs (fixable in later stages).
 
 ````markdown
-# HiringCafe Job Scraper
+# HiringCafe Job Scraper (v0)
 
 This project is a **web scraper** built with Python and Selenium that extracts job listings from [HiringCafe](https://hiring.cafe).  
 It collects job details such as:
@@ -13,42 +13,57 @@ It collects job details such as:
 - Remote status  
 - Workplace type (remote, hybrid, in-office)
 
-The results are saved to a CSV file.
+The results are saved into a CSV file for further use.
+
+⚠️ **Note:** This is **version 0 (v0)** of the scraper.  
+It is still experimental and may have **minor bugs** (e.g., missed job titles or mismatched companies), but these are fixable in later stages with improved parsing rules and error handling.
 
 ---
 
 ## Features
-- Uses **Selenium** to automate Chrome browser.
-- Automatically scrolls the page to load more jobs.
-- Clicks job postings to capture full job details.
-- Cleans and filters job titles to avoid junk values like "View all".
-- Outputs structured CSV data ready for analysis.
+- Automates Chrome browser with **Selenium**.  
+- Scrolls the job listings page to load more results automatically.  
+- Opens each job posting to capture **full job details** (titles, salaries, companies).  
+- Filters out junk titles like *"View all"* or *"Join our community"*.  
+- Outputs clean, structured CSV data ready for analysis.  
 
 ---
 
 ## Requirements
 
-You need Python **3.8+** installed.
+You’ll need:
+
+- Python **3.8+**
+- Google Chrome installed
 
 ### Install Dependencies
-Create a virtual environment (recommended) and install the required packages:
+
+It’s recommended to use a **virtual environment**:
 
 ```bash
-pip install pandas selenium
+python -m venv venv
+venv\Scripts\activate   # On Windows
+source venv/bin/activate   # On Mac/Linux
 ````
 
-For Selenium to work, you also need **Google Chrome** and a **matching ChromeDriver** installed.
-You can manage this with `webdriver-manager`:
+Then install the required packages:
 
 ```bash
-pip install webdriver-manager
+pip install pandas selenium webdriver-manager
+```
+
+⚠️ If you see errors related to **numpy/pandas**, fix them with:
+
+```bash
+pip install --upgrade pip setuptools wheel
+pip install --force-reinstall numpy pandas
 ```
 
 ---
 
 ## Usage
 
-Run the script in your terminal:
+Run the script from your terminal:
 
 ```bash
 python scraper.py
@@ -56,10 +71,10 @@ python scraper.py
 
 You’ll be prompted for:
 
-1. Job title or keywords
-2. Location (optional)
-3. Max number of jobs to scrape
-4. Output CSV filename
+1. **Job title or keywords**
+2. **Location** (leave blank for any)
+3. **Max number of jobs** to scrape
+4. **Output CSV filename**
 
 Example:
 
@@ -71,20 +86,27 @@ Max jobs (default 50): 100
 CSV filename (default jobs_results.csv): jobs.csv
 ```
 
-The scraper will run, scroll through job listings, open job detail pages, and save results to `jobs.csv`.
+The scraper will:
+
+1. Scroll through job listings
+2. Open job detail pages
+3. Extract the information
+4. Save results to your chosen CSV file
 
 ---
 
-## Output
+## Output Format
 
-The CSV file will contain the following columns:
+The CSV file will contain these columns:
 
-* **url**: Direct link to the job posting
-* **job title**: Title of the job (e.g., “Marketing Director”)
-* **company**: Company offering the job
-* **salary**: Extracted salary range if available
-* **remote**: `yes` or `no`
-* **workplace\_type**: `remote`, `hybrid`, or `in-office`
+| Column           | Description                                   |
+| ---------------- | --------------------------------------------- |
+| `url`            | Direct link to the job posting                |
+| `job title`      | Title of the job (e.g., “Marketing Director”) |
+| `company`        | Company offering the job                      |
+| `salary`         | Extracted salary (if available)               |
+| `remote`         | `yes` or `no`                                 |
+| `workplace_type` | `remote`, `hybrid`, or `in-office`            |
 
 ---
 
@@ -99,11 +121,16 @@ https://hiring.cafe/jobs/12345,Senior Marketing Director,Viatris,"$151,000-$314,
 
 ## Notes
 
-* The scraper uses **heuristics** to detect job titles, salaries, and company names.
-* If some jobs aren’t captured, try:
+* This scraper is **v0**: it works, but may skip or mislabel some jobs.
+* Improvements (planned for future versions):
 
-  * Increasing the scroll limit (`max_scrolls` in code).
+  * More robust job title extraction.
+  * Better company parsing.
+  * Handling of edge cases for salaries.
+* If some jobs aren’t being captured, try:
+
+  * Increasing the scroll limit (`max_scrolls` in the code).
   * Using different keywords.
-  * Running the script with more max jobs.
+  * Running the script with a higher max jobs setting.
 
 ---
