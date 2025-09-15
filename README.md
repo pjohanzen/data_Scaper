@@ -1,4 +1,4 @@
-Got it 👍 — here’s your updated **README.md** with the note about this being **v0** and still having minor bugs (fixable in later stages).
+
 
 ````markdown
 # HiringCafe Job Scraper (v0)
